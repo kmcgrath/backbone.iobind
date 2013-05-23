@@ -1,18 +1,10 @@
-(function (undefined) {
-  // Common JS // require JS
-  var _, $, Backbone, exports;
-  if (typeof window === 'undefined' || typeof require === 'function') {
-    $ = require('jquery');
-    _ = require('underscore');
-    Backbone = require('backbone');
-    exports = Backbone;
-    if (typeof module !== 'undefined') module.exports = exports;
-  } else {
-    $ = this.$;
-    _ = this._;
-    Backbone = this.Backbone;
-    exports = this;
+(function (factory) {
+  if (typeof exports === 'object') {
+    module.exports = factory(require('backbone'), require('underscore'));
+  } else if (typeof define === 'function' && define.amd) {
+    define(['backbone', 'underscore'], factory);
   }
+}(function (Backbone, _) {
 
 
 /*!
@@ -90,5 +82,5 @@ var urlError = function() {
   throw new Error('A "url" property or function must be specified');
 };
 
-
-})();
+  return Backbone;
+}));
