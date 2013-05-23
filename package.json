@@ -2,11 +2,11 @@
   "author": "Jake Luer <@jakeluer>",
   "name": "backbone.iobind",
   "description": "Bind socket.io events to backbone models & collections.",
-  "version": "0.4.6",
+  "version": "0.4.6a",
   "homepage": "http://logicalparadox.github.com/backbone.iobind",
   "repository": {
     "type": "git",
-    "url": "git://github.com/logicalparadox/backbone.iobind.git"
+    "url": "git://github.com/mauron85/backbone.iobind.git"
   },
   "engines": {
     "node": ">= 0.4.0"
