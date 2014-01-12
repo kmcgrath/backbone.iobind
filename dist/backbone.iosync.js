@@ -36,15 +36,7 @@
  *
  * @name sync
  */
-var origSync = Backbone.sync;
-
 Backbone.sync = function (method, model, options) {
-  // If your socket.io connection exists on a different var, change here:
-  var io = model.socket || Backbone.socket || window.socket
-  // If you don't pass in the socket, then we assume you want to use normal sync
-  if(!io) {
-    return origSync(method, model, options);
-  }
   var params = _.extend({}, options)
 
   if (params.url) {
@@ -63,6 +55,9 @@ Backbone.sync = function (method, model, options) {
   if (params.patch === true && params.data.id == null && model) {
     params.data.id = model.id;
   }
+
+  // If your socket.io connection exists on a different var, change here:
+  var io = model.socket || Backbone.socket || window.socket
 
   //since Backbone version 1.0.0 all events are raised in methods 'fetch', 'save', 'remove' etc
 
