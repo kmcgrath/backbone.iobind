@@ -1,11 +1,16 @@
-0.4.6 / 2013-04-03 
+0.4.7-alfa / 2013-05-23
+==================
+
+  * Tony's AMD patch applied
+
+0.4.6 / 2013-04-03
 ==================
 
   * Compatibility with Backbone 1.0.0
   * Tests for Backbone.sync
   * Support model.save(attrs, {patch: true})
 
-0.4.3 / 2012-01-25 
+0.4.3 / 2012-01-25
 ==================
 
   * Prefix doesn't have a problem with non-existent `module` var. Closed #8

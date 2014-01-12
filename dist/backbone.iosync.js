@@ -1,18 +1,10 @@
-(function (undefined) {
-  // Common JS // require JS
-  var _, $, Backbone, exports;
-  if (typeof window === 'undefined' || typeof require === 'function') {
-    $ = require('jquery');
-    _ = require('underscore');
-    Backbone = require('backbone');
-    exports = Backbone;
-    if (typeof module !== 'undefined') module.exports = exports;
-  } else {
-    $ = this.$;
-    _ = this._;
-    Backbone = this.Backbone;
-    exports = this;
+(function (factory) {
+  if (typeof exports === 'object') {
+    module.exports = factory(require('backbone'), require('underscore'));
+  } else if (typeof define === 'function' && define.amd) {
+    define(['backbone', 'underscore'], factory);
   }
+}(function (Backbone, _) {
 
 
 /*!
@@ -44,7 +36,15 @@
  *
  * @name sync
  */
+var origSync = Backbone.sync;
+
 Backbone.sync = function (method, model, options) {
+  // If your socket.io connection exists on a different var, change here:
+  var io = model.socket || Backbone.socket || window.socket
+  // If you don't pass in the socket, then we assume you want to use normal sync
+  if(!io) {
+    return origSync(method, model, options);
+  }
   var params = _.extend({}, options)
 
   if (params.url) {
@@ -63,9 +63,6 @@ Backbone.sync = function (method, model, options) {
   if (params.patch === true && params.data.id == null && model) {
     params.data.id = model.id;
   }
-
-  // If your socket.io connection exists on a different var, change here:
-  var io = model.socket || Backbone.socket || window.socket
 
   //since Backbone version 1.0.0 all events are raised in methods 'fetch', 'save', 'remove' etc
 
@@ -90,5 +87,5 @@ var urlError = function() {
   throw new Error('A "url" property or function must be specified');
 };
 
-
-})();
+  return Backbone;
+}));
